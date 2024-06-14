@@ -1,14 +1,14 @@
 package org.example.lab8.controller;
 
 
+import ch.qos.logback.core.model.Model;
 import org.example.lab8.entity.Movie;
 import org.example.lab8.repository.MovieRepository;
 import org.example.lab8.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +25,11 @@ public class HomeController {
         this.userRepository = userRepository;
     }
 
+
+    @PostMapping("/save")
+    public String guardarMovieFavorite(@ModelAttribute("movie") @Valid Movie movie, BindingResult bindingResult, Model model) {
+
+    }
 
 
 }

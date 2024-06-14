@@ -2,10 +2,7 @@ package org.example.lab8.dao;
 
 import org.example.lab8.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +23,7 @@ public class ReproduccionDao {
 
     private String token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmI0ODU2ZWE2NGVjYjZjN2Y4ZWRjOTZkOGMxYzRjOCIsInN1YiI6IjY2NmI4YjQ4N2QzOTFlMDBiNTcwYmIxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ndrJJ8Kv8JmqfiMrF0cWN0OAXb3pOltDw0qgdAPn8Wc";
 
-    public List<String> listaCineReproduccionAuth(String titulo){
+    public String listaCineReproduccionAuth(String titulo){
         //RestTemplate restTemplate=new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -38,8 +35,29 @@ public class ReproduccionDao {
 
         HttpEntity<Movie> movie = new HttpEntity<>(headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, movie, String.class);
+        ResponseEntity <String> response = restTemplate.exchange(url, HttpMethod.GET, movie, String.class);
 
         return response.getBody();
     }
+
+
+    public void guardarPeliculaFavorita(Movie movie ){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String url = "'https://api.themoviedb.org/3/discover/movie";
+
+        HttpEntity<Movie> httpEntity = new HttpEntity<>(movie, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        if(movie.getIdMovie()>0){
+            restTemplate.put(url, httpEntity, Movie.class);
+        }else{
+            restTemplate.postForEntity(url, httpEntity, Movie.class);
+        }
+    }
+
+
 }
+
+
