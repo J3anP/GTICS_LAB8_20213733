@@ -26,6 +26,7 @@ public class MovieConfig {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -33,7 +34,6 @@ public class MovieConfig {
         httpSecurity.httpBasic();
 
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
-
         return httpSecurity.build();
     }
 }
