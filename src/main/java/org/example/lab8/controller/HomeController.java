@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +27,6 @@ public class HomeController {
     }
 
 
-    @PostMapping("/save")
-    public String guardarMovieFavorite(@ModelAttribute("movie") @Valid Movie movie, BindingResult bindingResult, Model model) {
-
-    }
 
 
 }
